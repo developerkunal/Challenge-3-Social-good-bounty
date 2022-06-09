@@ -61,7 +61,7 @@ Near Showcode Challenge            </Navbar.Brand>
                 onClick={window.walletConnection.isSignedIn() ? logout : login}
               >
                 {window.walletConnection.isSignedIn()
-                  ? window.accountId
+                  ? "Logout"
                   : "Login"}
               </Nav.Link>{" "}
             </Nav>
@@ -69,7 +69,8 @@ Near Showcode Challenge            </Navbar.Brand>
         </Container>
       </Navbar>
       <Container>
-      <Login></Login>
+        {window.walletConnection.isSignedIn() ? <Card><center><h1>You are Logged in </h1></center></Card> :
+      <Login></Login>}
       {window.accountId && 
     (check_nft  ? <Profile></Profile> : <Usernft ></Usernft>)
     }</Container>
