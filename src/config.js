@@ -1,4 +1,4 @@
-const CONTRACT_NAME = "showcode-nft.kunaldawar.testnet";
+const CONTRACT_NAME = "zoonftcode.kunaldawar.testnet";
 
 function getConfig(env) {
   switch (env) {

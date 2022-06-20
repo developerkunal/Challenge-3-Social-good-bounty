@@ -33,6 +33,9 @@ export async function initContract() {
 
   //making utils public
   window.utils = utils;
+  const accountbalance =window.accountId &&  await near.account(window.accountId);
+  window.userbalance = window.accountId && await accountbalance.getAccountBalance();
+  
 
   // Creating new account object
   window.account = new Account(near, window.accountId);
@@ -42,12 +45,14 @@ export async function initContract() {
     nearConfig.contractName,
     {
       // View methods are read only. They don't modify the state, but usually return some value.
-      viewMethods: ["check_token","nft_token"],
+      viewMethods: ["check_token","get_attributes"],
       // Change methods can modify the state. But you don't receive the returned value when called.
-      changeMethods: ["nft_mint"],
+      changeMethods: ["nft_mint","buy_food","feed"],
     }
   );
+  
 }
+
 
 export function logout() {
   window.walletConnection.signOut();

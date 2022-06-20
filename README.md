@@ -1,4 +1,4 @@
-Challenge #2 NFT and Frontend
+Challenge #3 Social good bounty
 ==================
 
 This [React] app was initialized with [create-near-app]

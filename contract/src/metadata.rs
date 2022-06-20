@@ -33,14 +33,6 @@ pub struct TokenMetadata {
     pub updated_at: Option<u64>, // When token was last updated, Unix epoch in milliseconds
     pub extra: Option<String>, // anything extra the NFT wants to store on-chain. Can be stringified JSON.
     pub reference: Option<String>, // URL to an off-chain JSON file with more info.
-    pub os: Option<String>,
-    pub frontend: Option<String>,
-    pub backend: Option<String>,
-    pub skill1: Option<String>,
-    pub skill2: Option<String>,
-    pub twitter: Option<String>,
-    pub github: Option<String>,
-    pub showcode: Option<String>,
     pub reference_hash: Option<Base64VecU8>, // Base64-encoded sha256 hash of JSON from reference field. Required if `reference` is included.
 }
 

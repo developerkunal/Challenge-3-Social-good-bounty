@@ -6,13 +6,13 @@ impl Contract {
     pub fn nft_mint(
         &mut self,
         token_id: TokenId,
-        metadata: TokenMetadata,
         receiver_id: AccountId,
         //we add an optional parameter for perpetual royalties
         perpetual_royalties: Option<HashMap<AccountId, u32>>,
     ) {
         //measure the initial storage being used on the contract
         let initial_storage_usage = env::storage_usage();
+        let food_deposit = env::attached_deposit();
 
         // create a royalty map to store in the token
         let mut royalty = HashMap::new();
@@ -27,7 +27,20 @@ impl Contract {
                 royalty.insert(account, amount);
             }
         }
-
+        let metadata = TokenMetadata {
+            title: Some("Donator NFT".to_string()),
+            description: Some("Thanks For Donations You Helped a animal to survive".to_string()),
+            media: Some("https://bafybeicyyosrndgdqki6qsykgrks3l4wfajnkuz4y3arw6arheyk3zf3gu.ipfs.nftstorage.link/".to_string()),
+            copies: None,
+            expires_at: None,
+            extra: None,
+            issued_at: None,
+            media_hash: None,
+            reference: None,
+            reference_hash: None,
+            updated_at: None,
+            starts_at: None,
+        };
         //specify the token struct that contains the owner ID 
         let token = Token {
             //set the owner ID equal to the receiver ID passed into the function
@@ -44,6 +57,17 @@ impl Contract {
         assert!(
             self.tokens_by_id.insert(&token_id, &token).is_none(),
             "Token already exists"
+        );
+        
+        let card_attr = CardAttr {
+            food: food_deposit / 1000000000000000000000000,
+            feed: 0,
+        };
+
+        //insert the token ID and token struct and make sure that the token doesn't exist
+        assert!(
+            self.card_attr.insert(&token_id, &card_attr).is_none(),
+            "Token already exists for card attribute"
         );
 
         //insert the token ID and metadata
