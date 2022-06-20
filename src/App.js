@@ -19,25 +19,7 @@ import getConfig from "./config";
 const { networkId } = getConfig(process.env.NODE_ENV || "development");
 
 export default function App() {
-  const [check_nft, setNftStatus] = useState(false);
-
-  useEffect(() => {
-    const nftstatus = async () => {
-
-      if (window.accountId !== "") {
-        
-
-        setNftStatus(
-          await window.contract.check_token({
-            id: `${window.accountId}-showcode-challenge`,
-
-          })
-        );
-      }
-      
-    };
-    nftstatus();
-  }, []);
+  
   
   return (
     <React.Fragment>
